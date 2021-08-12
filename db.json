@@ -20,13 +20,6 @@
       "quantity": 10,
       "image": "http://lorempixel.com/160/160/food/8/",
       "id": 3
-    },
-    {
-      "name": "Sandwich",
-      "price": 40,
-      "quantity": 10,
-      "image": "http://lorempixel.com/160/160/food/9/",
-      "id": 4
     }
   ],
   "balance": {
