@@ -1,16 +1,19 @@
-import { api } from '.'
+import { api } from '.';
 import {
    fetchProductsFailure,
-   fetchProductsSuccess,
-} from '../store/actions/productAction'
-import { fetchPurchasedProductsRequest } from './../store/actions/purchasedProducts'
+   fetchProductsSuccess
+} from '../store/actions/productAction';
+import { fetchProductsRequest } from './../store/actions/productAction';
 
 export const fetchProducts = () => {
-   return async (dispatch: any) => {
-      dispatch(fetchPurchasedProductsRequest())
-      await api
-         .get('/products')
-         .then((response) => dispatch(fetchProductsSuccess(response?.data)))
-         .catch((error) => dispatch(fetchProductsFailure(error)))
+   return  (dispatch: any) => {
+      dispatch(fetchProductsRequest())
+      setTimeout(async () => {
+         await api
+            .get('/products')
+            .then((response) => dispatch(fetchProductsSuccess(response?.data)))
+            .catch((error) => dispatch(fetchProductsFailure(error)))
+      }, 1000);
+      
    }
 }

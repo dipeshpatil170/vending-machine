@@ -26,6 +26,10 @@ type BalanceState = {
    isBalanceFetchSuccess: boolean
    isBalanceFetchError: boolean
    balanceFetchErrorMessage: string
+   isBalanceAddLoading: boolean
+   isBalanceAddSuccess: boolean
+   isBalanceAddError: boolean
+   balanceAddErrorMessage: string
 }
 
 type BalanceAction = {

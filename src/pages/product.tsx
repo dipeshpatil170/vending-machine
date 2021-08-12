@@ -1,13 +1,10 @@
 import { Box, Skeleton, Stack, Text } from '@chakra-ui/react'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from '../api/productsApi'
+import { useSelector } from 'react-redux'
 import { AlertMessage } from '../components/AlertMessage'
 import { ProductsList } from '../containers/products/productsList'
 import { RootState } from '../store/reducers'
 
 export const Product = () => {
-   const dispatch = useDispatch()
 
    const {
       products,
@@ -18,11 +15,12 @@ export const Product = () => {
    } = useSelector((state: RootState) => {
       return state.product
    })
-
-   useEffect(() => {
-      dispatch(fetchProducts())
-   }, [dispatch])
-
+   const {
+      balance,
+   } = useSelector((state: RootState) => {
+      return state.balance
+   })
+  
    return (
       <>
          <Box bg="gray" w="100%" p={3} color="white">
@@ -30,8 +28,8 @@ export const Product = () => {
                <Text fontSize="3xl">Products</Text>
             </Stack>
          </Box>
-         {products && products.length > 0 && (
-            <ProductsList products={products} />
+         {products &&  !isProductFetching && products.length > 0 && (
+            <ProductsList products={products} balance={balance} />
          )}
          {products && isProductFetchSuccess && products.length === 0 && (
             <AlertMessage
@@ -49,9 +47,9 @@ export const Product = () => {
          )}
          {isProductFetching && (
             <Stack>
-               <Skeleton height="20px" />
-               <Skeleton height="20px" />
-               <Skeleton height="20px" />
+               <Skeleton height="30px" />
+               <Skeleton height="30px" />
+               <Skeleton height="30px" />
             </Stack>
          )}
       </>
