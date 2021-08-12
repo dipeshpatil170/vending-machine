@@ -8,14 +8,14 @@ import reportWebVitals from './reportWebVitals'
 import configureAppStore from './store'
 const store = configureAppStore({})
 ReactDOM.render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ChakraProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+   <React.StrictMode>
+      <ChakraProvider>
+         <Provider store={store}>
+            <App />
+         </Provider>
+      </ChakraProvider>
+   </React.StrictMode>,
+   document.getElementById('root')
 )
 
 reportWebVitals()

@@ -6,12 +6,12 @@ import rootReducer from './reducers'
 const logger = createLogger({})
 
 export default function configureAppStore(preloadedState: any) {
-  const store = configureStore({
-    reducer: rootReducer,
-    middleware: [logger, ...getDefaultMiddleware({ thunk: true }), thunk],
-    preloadedState,
-    enhancers: [],
-  })
+   const store = configureStore({
+      reducer: rootReducer,
+      middleware: [logger, ...getDefaultMiddleware({ thunk: true }), thunk],
+      preloadedState,
+      enhancers: [],
+   })
 
-  return store
+   return store
 }
