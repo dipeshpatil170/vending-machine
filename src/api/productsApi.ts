@@ -1,5 +1,8 @@
-import { api } from "."
-import { fetchProductsFailure, fetchProductsSuccess } from "../store/actions/productAction"
+import { api } from '.'
+import {
+  fetchProductsFailure,
+  fetchProductsSuccess,
+} from '../store/actions/productAction'
 
 export const fetchProducts = () => {
   return async (dispatch: any) => {

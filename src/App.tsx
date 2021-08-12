@@ -1,6 +1,7 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { fetchBalance } from './api/balanceApi'
 import { fetchProducts } from './api/productsApi'
 import './App.css'
 import { AddBankMoneyPannel } from './pages/addBankMoneyPannel'
@@ -12,6 +13,7 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchProducts())
+    dispatch(fetchBalance())
   }, [dispatch])
   return (
     <Container maxW="container.lg">

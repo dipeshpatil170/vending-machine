@@ -6,10 +6,29 @@ interface IProduct {
   id: number
 }
 type ProductState = {
-  isLoading: boolean
   products: IProduct[]
+  isProductFetching: boolean
+  isProductFetchSuccess: boolean
+  isProductFetchError: boolean
+  productFetchErrorMessage: string
 }
 type ProductAction = {
   type: string
   payload: ProductState
+}
+interface Ibalance {
+  amount: number
+}
+
+type BalanceState = {
+  balance: Ibalance
+  isBalanceFetching: boolean
+  isBalanceFetchSuccess: boolean
+  isBalanceFetchError: boolean
+  balanceFetchErrorMessage: string
+}
+
+type BalanceAction = {
+  type: string
+  payload: BalanceState
 }
