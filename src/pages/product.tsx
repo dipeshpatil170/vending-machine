@@ -1,4 +1,4 @@
-import { Skeleton, Stack } from '@chakra-ui/react'
+import { Box, Skeleton, Stack, Text } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../api/productsApi'
@@ -25,6 +25,11 @@ export const Product = () => {
 
    return (
       <>
+         <Box bg="gray" w="100%" p={3} color="white">
+            <Stack spacing={3}>
+               <Text fontSize="3xl">Products</Text>
+            </Stack>
+         </Box>
          {products && products.length > 0 && (
             <ProductsList products={products} />
          )}

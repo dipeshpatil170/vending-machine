@@ -1,7 +1,7 @@
 import {
    FETCH_BALANCE_FAILURE,
    FETCH_BALANCE_REQUEST,
-   FETCH_BALANCE_SUCCESS,
+   FETCH_BALANCE_SUCCESS
 } from '../../types/Types'
 
 export const fetchBalanceRequest = () => {
@@ -21,7 +21,7 @@ export const fetchBalanceFailure = (e: Error) => {
    return {
       type: FETCH_BALANCE_FAILURE,
       payload: {
-         productFetchErrorMessage: e?.message || 'Internal Server Error',
+         balanceFetchErrorMessage: e?.message || 'Internal Server Error',
       },
    }
 }

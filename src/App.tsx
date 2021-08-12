@@ -1,8 +1,11 @@
-import { Box, Container, Grid, GridItem, Stack, Text } from '@chakra-ui/react'
+import { Container, Grid, GridItem } from '@chakra-ui/react'
 import './App.css'
+import { AddMoneyOption } from './pages/addMoneyOption'
 import { Product } from './pages/product'
+import { PurchasedProducts } from './pages/purchasedProducts'
+import { Wallet } from './pages/wallet'
 
-interface Props {}
+interface Props { }
 function App(props: Props) {
    return (
       <Container maxW="container.xl" paddingTop={5}>
@@ -13,33 +16,16 @@ function App(props: Props) {
             gap={4}
          >
             <GridItem rowSpan={3} colSpan={3}>
-               <Box bg="gray" w="100%" p={3} color="white">
-                  <Stack spacing={3}>
-                     <Text fontSize="3xl">Products</Text>
-                  </Stack>
-               </Box>
                <Product />
             </GridItem>
             <GridItem colSpan={2} marginLeft={10}>
-               <Box bg="gray" w="100%" p={3} color="white">
-                  <Stack spacing={3}>
-                     <Text fontSize="1xl">Wallet</Text>
-                  </Stack>
-               </Box>
+               <Wallet />
             </GridItem>
             <GridItem colSpan={2} marginLeft={10}>
-               <Box bg="gray" w="100%" p={3} color="white">
-                  <Stack spacing={3}>
-                     <Text fontSize="1xl">Add money option</Text>
-                  </Stack>
-               </Box>
+               <AddMoneyOption />
             </GridItem>
             <GridItem colSpan={2} marginLeft={10}>
-               <Box bg="gray" w="100%" p={3} color="white">
-                  <Stack spacing={3}>
-                     <Text fontSize="1xl">Purchased Products</Text>
-                  </Stack>
-               </Box>
+               <PurchasedProducts />
             </GridItem>
          </Grid>
       </Container>
