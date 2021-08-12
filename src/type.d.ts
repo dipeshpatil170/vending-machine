@@ -47,9 +47,19 @@ type PurchasedProductsState = {
    isPurchasedProductsFetchSuccess: boolean
    isPurchasedProductsFetchError: boolean
    purchasedProductsFetchErrorMessage: string
+   isAddPurchasedProductLoading: boolean
+   isAddPurchasedProductSuccess: boolean
+   isAddPurchasedProductError: boolean
+   purchasedProductsAddErrorMessage: string
 }
 
 type PurchasedProductsAction = {
    type: string
    payload: PurchasedProductsState
+}
+interface IProductPurchase {
+   name: string
+   price: number
+   quantity: number
+   image: any
 }

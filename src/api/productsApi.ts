@@ -17,3 +17,14 @@ export const fetchProducts = () => {
       
    }
 }
+export const decrementProductQuantity = (product:IProduct) => {
+   return async (dispatch: any)=>{
+      await api.put(`/products/${product?.id}`, product)
+         .then((response) => {
+            console.log('response ', response);
+         })
+         .catch((error) => {
+            console.log('error ', error);
+         })
+   }
+}

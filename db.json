@@ -6,24 +6,46 @@
       "quantity": 10,
       "image": "http://lorempixel.com/160/160/food/5/",
       "id": 1
-    },
-    {
-      "name": "Ice Apples",
-      "price": 20,
-      "quantity": 10,
-      "image": "http://lorempixel.com/160/160/food/7/",
-      "id": 2
-    },
-    {
-      "name": "Sweets",
-      "price": 30,
-      "quantity": 10,
-      "image": "http://lorempixel.com/160/160/food/8/",
-      "id": 3
     }
   ],
   "balance": {
     "amount": 10
   },
-  "purchasedproducts": []
+  "purchasedproducts": [
+    {
+      "name": "Salad",
+      "price": 10,
+      "quantity": 10,
+      "image": "http://lorempixel.com/160/160/food/5/",
+      "id": 1
+    },
+    {
+      "name": "Salad",
+      "price": 10,
+      "quantity": 10,
+      "image": "http://lorempixel.com/160/160/food/5/",
+      "id": 2
+    },
+    {
+      "name": "Salad",
+      "price": 10,
+      "quantity": 10,
+      "image": "http://lorempixel.com/160/160/food/5/",
+      "id": 3
+    },
+    {
+      "name": "Salad",
+      "price": 10,
+      "quantity": 10,
+      "image": "http://lorempixel.com/160/160/food/5/",
+      "id": 4
+    },
+    {
+      "name": "Salad",
+      "price": 10,
+      "quantity": 10,
+      "image": "http://lorempixel.com/160/160/food/5/",
+      "id": 5
+    }
+  ]
 }

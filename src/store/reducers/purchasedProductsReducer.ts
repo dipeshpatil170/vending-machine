@@ -1,7 +1,10 @@
 import {
+   BUY_PRODUCT_FAILURE,
+   BUY_PRODUCT_REQUEST,
+   BUY_PRODUCT_SUCCESS,
    FETCH_PURCHASEDPRODUCTS_FAILURE,
    FETCH_PURCHASEDPRODUCTS_REQUEST,
-   FETCH_PURCHASEDPRODUCTS_SUCCESS,
+   FETCH_PURCHASEDPRODUCTS_SUCCESS
 } from './../../types/Types'
 
 const initialState: PurchasedProductsState = {
@@ -10,6 +13,10 @@ const initialState: PurchasedProductsState = {
    isPurchasedProductsFetchSuccess: false,
    isPurchasedProductsFetchError: false,
    purchasedProductsFetchErrorMessage: '',
+   isAddPurchasedProductLoading: false,
+   isAddPurchasedProductSuccess: false,
+   isAddPurchasedProductError: false,
+   purchasedProductsAddErrorMessage: '',
 }
 
 export const purchasedProducts = (
@@ -38,6 +45,28 @@ export const purchasedProducts = (
             isPurchasedProductsFetchError: true,
             purchasedProductsFetchErrorMessage:
                action?.payload?.purchasedProductsFetchErrorMessage,
+         }
+      case BUY_PRODUCT_REQUEST: {
+         return {
+            ...state,
+            isAddPurchasedProductLoading:false
+         }
+      }
+      case BUY_PRODUCT_SUCCESS: {
+         return {
+            ...state,
+            isAddPurchasedProductLoading: false,
+            isAddPurchasedProductSuccess: true,
+            purchasedProducts: state.purchasedProducts.concat(action?.payload?.purchasedProducts)
+         }
+      }
+      case BUY_PRODUCT_FAILURE:
+         return {
+            ...state,
+            isAddPurchasedProductLoading: false,
+            isAddPurchasedProductError: true,
+            purchasedProductsAddErrorMessage: action?.payload?.purchasedProductsAddErrorMessage,
+
          }
 
       default:

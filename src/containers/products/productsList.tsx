@@ -3,10 +3,11 @@ import { SingleProduct } from './singleProduct'
 
 interface Props {
    products: IProduct[]
-   balance:Ibalance
+   balance: Ibalance
+   handleBuyProduct:Function
 }
 
-export const ProductsList = ({ products, balance }: Props) => {
+export const ProductsList = ({ products, balance, handleBuyProduct }: Props) => {
    return (
       <>
          <Box
@@ -21,7 +22,7 @@ export const ProductsList = ({ products, balance }: Props) => {
                   products.length > 0 &&
                   products.map((product) => {
                      return (
-                        <SingleProduct key={product?.id} product={product} balance={balance} />
+                        <SingleProduct key={product?.id} product={product} balance={balance} handleBuyProduct={handleBuyProduct} />
                      )
                   })}
             </Grid>
