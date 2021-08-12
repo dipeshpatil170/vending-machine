@@ -5,7 +5,7 @@ import { fetchProducts } from './api/productsApi'
 import './App.css'
 import { AlertMessage } from './components/AlertMessage'
 import { BalancePannel } from './pages/balancePannel'
-import { ProductsList } from './pages/products/productsList'
+import { ProductsList } from './pages/productsList'
 import { RootState } from './store/reducers'
 
 interface Props {
