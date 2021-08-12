@@ -1,9 +1,13 @@
 import {
    FETCH_BALANCE_FAILURE,
    FETCH_BALANCE_REQUEST,
-   FETCH_BALANCE_SUCCESS
-} from '../../types/Types';
-import { ADD_BALANCE_FAILURE, ADD_BALANCE_REQUEST, ADD_BALANCE_SUCCESS } from './../../types/Types';
+   FETCH_BALANCE_SUCCESS,
+} from '../../types/Types'
+import {
+   ADD_BALANCE_FAILURE,
+   ADD_BALANCE_REQUEST,
+   ADD_BALANCE_SUCCESS,
+} from './../../types/Types'
 
 export const fetchBalanceRequest = () => {
    return {
@@ -22,7 +26,7 @@ export const fetchBalanceFailure = (e: Error) => {
    return {
       type: FETCH_BALANCE_FAILURE,
       payload: {
-         balanceFetchErrorMessage: e?.message || 'Internal Server Error',
+         errorBalanceFetchMessage: e?.message || 'Internal Server Error',
       },
    }
 }
@@ -43,8 +47,7 @@ export const addBalanceFailure = (e: Error) => {
    return {
       type: ADD_BALANCE_FAILURE,
       payload: {
-         balanceAddErrorMessage: e?.message || 'Internal Server Error',
+         errorAddBalanceMessage: e?.message || 'Internal Server Error',
       },
    }
 }
-

@@ -2,15 +2,15 @@ import { Box, Skeleton, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { AlertMessage } from '../components/AlertMessage'
+import { PurchasedProductList } from '../containers/purchasedProductList'
 import { RootState } from '../store/reducers'
 
 export const PurchasedProducts = () => {
-
    const {
       purchasedProducts,
       isPurchasedProductsFetching,
       isPurchasedProductsFetchError,
-      purchasedProductsFetchErrorMessage,
+      errorPurchasedProductsFetchMessage,
    } = useSelector((state: RootState) => {
       return state.purchasedProducts
    })
@@ -24,9 +24,7 @@ export const PurchasedProducts = () => {
                      <Text fontSize="1xl">Purchased Products</Text>
                   </Stack>
                </Box>
-               <Box w="100%" p={4} boxShadow="lg" bg="gray.50">
-                  <Text fontSize="lg">Purchased Products</Text>
-               </Box>
+               <PurchasedProductList purchasedProducts={purchasedProducts}/>
             </>
          )}
 
@@ -34,7 +32,7 @@ export const PurchasedProducts = () => {
             <AlertMessage
                status="error"
                title="Some Error Occured"
-               description={purchasedProductsFetchErrorMessage}
+               description={errorPurchasedProductsFetchMessage}
             />
          )}
          {isPurchasedProductsFetching && (

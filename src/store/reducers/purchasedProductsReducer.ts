@@ -12,11 +12,10 @@ const initialState: PurchasedProductsState = {
    isPurchasedProductsFetching: false,
    isPurchasedProductsFetchSuccess: false,
    isPurchasedProductsFetchError: false,
-   purchasedProductsFetchErrorMessage: '',
-   isAddPurchasedProductLoading: false,
+   errorPurchasedProductsFetchMessage: '',
    isAddPurchasedProductSuccess: false,
    isAddPurchasedProductError: false,
-   purchasedProductsAddErrorMessage: '',
+   errorAddPurchasedProductsMessage: '',
 }
 
 export const purchasedProducts = (
@@ -43,30 +42,32 @@ export const purchasedProducts = (
             ...state,
             isPurchasedProductsFetching: false,
             isPurchasedProductsFetchError: true,
-            purchasedProductsFetchErrorMessage:
-               action?.payload?.purchasedProductsFetchErrorMessage,
+            errorPurchasedProductsFetchMessage:
+               action?.payload?.errorPurchasedProductsFetchMessage,
          }
       case BUY_PRODUCT_REQUEST: {
          return {
             ...state,
-            isAddPurchasedProductLoading:false
+            isPurchasedProductsFetching:true
          }
       }
       case BUY_PRODUCT_SUCCESS: {
          return {
             ...state,
-            isAddPurchasedProductLoading: false,
+            isPurchasedProductsFetching: false,
             isAddPurchasedProductSuccess: true,
-            purchasedProducts: state.purchasedProducts.concat(action?.payload?.purchasedProducts)
+            purchasedProducts: state.purchasedProducts.concat(
+               action?.payload?.purchasedProducts
+            ),
          }
       }
       case BUY_PRODUCT_FAILURE:
          return {
             ...state,
-            isAddPurchasedProductLoading: false,
+            isPurchasedProductsFetching: false,
             isAddPurchasedProductError: true,
-            purchasedProductsAddErrorMessage: action?.payload?.purchasedProductsAddErrorMessage,
-
+            errorAddPurchasedProductsMessage:
+               action?.payload?.errorAddPurchasedProductsMessage,
          }
 
       default:

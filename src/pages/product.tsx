@@ -1,8 +1,9 @@
 import { Box, Skeleton, Stack, Text } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
+import { decrementProductQuantity } from '../api/productsApi'
 import { buyProduct } from '../api/purchasedProductsApi'
 import { AlertMessage } from '../components/AlertMessage'
-import { ProductsList } from '../containers/products/productsList'
+import { ProductsList } from '../containers/productsList'
 import { RootState } from '../store/reducers'
 
 export const Product = () => {
@@ -12,26 +13,24 @@ export const Product = () => {
       isProductFetching,
       isProductFetchSuccess,
       isProductFetchError,
-      productFetchErrorMessage,
+      errorProductFetchMessage,
    } = useSelector((state: RootState) => {
       return state.product
    })
-   const {
-      balance,
-   } = useSelector((state: RootState) => {
+   const { balance } = useSelector((state: RootState) => {
       return state.balance
    })
-  
+
    const handleBuyProduct = (product: IProduct) => {
       let productTobePurchase: IProductPurchase = {
          name: product.name,
          price: product.price,
          quantity: product.quantity,
-         image: product.image
-      };
-      dispatch(buyProduct(productTobePurchase));
-      // const decrementedProductQuantity: IProduct = { ...product, quantity: product.quantity - 1 }
-      // dispatch(decrementProductQuantity(decrementedProductQuantity));
+         image: product.image,
+      }
+      dispatch(buyProduct(productTobePurchase))
+      const decrementedProductQuantity: IProduct = { ...product, quantity: product.quantity - 1 }
+      dispatch(decrementProductQuantity(decrementedProductQuantity));
    }
 
    return (
@@ -42,7 +41,11 @@ export const Product = () => {
             </Stack>
          </Box>
          {products && !isProductFetching && products.length > 0 && (
-            <ProductsList products={products} balance={balance} handleBuyProduct={handleBuyProduct} />
+            <ProductsList
+               products={products}
+               balance={balance}
+               handleBuyProduct={handleBuyProduct}
+            />
          )}
          {products && isProductFetchSuccess && products.length === 0 && (
             <AlertMessage
@@ -55,7 +58,7 @@ export const Product = () => {
             <AlertMessage
                status="error"
                title="Some Error Occured"
-               description={productFetchErrorMessage}
+               description={errorProductFetchMessage}
             />
          )}
          {isProductFetching && (

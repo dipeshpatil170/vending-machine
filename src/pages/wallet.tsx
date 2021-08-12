@@ -1,4 +1,13 @@
-import { Box, Progress, Skeleton, Stack, Stat, StatLabel, StatNumber, Text } from '@chakra-ui/react'
+import {
+   Box,
+   Progress,
+   Skeleton,
+   Stack,
+   Stat,
+   StatLabel,
+   StatNumber,
+   Text
+} from '@chakra-ui/react'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { AlertMessage } from '../components/AlertMessage'
@@ -11,11 +20,10 @@ export const Wallet = () => {
       isBalanceFetching,
       isBalanceFetchSuccess,
       isBalanceFetchError,
-      balanceFetchErrorMessage,
-      isBalanceAddLoading,
-      isBalanceAddSuccess,
-      isBalanceAddError,
-      balanceAddErrorMessage
+      errorBalanceFetchMessage,
+      isAddBalanceSuccess,
+      isAddBalanceError,
+      errorAddBalanceMessage,
    } = useSelector((state: RootState) => {
       return state.balance
    })
@@ -27,7 +35,6 @@ export const Wallet = () => {
                <Text fontSize="1xl">Wallet</Text>
             </Stack>
          </Box>
-        
 
          {balance && isBalanceFetchSuccess && (
             <>
@@ -37,16 +44,24 @@ export const Wallet = () => {
                </Stat>
             </>
          )}
-         {isBalanceAddSuccess && (
-            <ToastNotification  title="Balance Credited !" description="Amount has been credited into your wallet." status="success"/>
+         {isAddBalanceSuccess && (
+            <ToastNotification
+               title="Balance Credited !"
+               description="Amount has been credited into your wallet."
+               status="success"
+            />
          )}
-         {isBalanceAddError && (
-            <ToastNotification title="Error Occured !" description={balanceAddErrorMessage} status="error"/>
+         {isAddBalanceError && (
+            <ToastNotification
+               title="Error Occured !"
+               description={errorAddBalanceMessage}
+               status="error"
+            />
          )}
 
-         {isBalanceAddLoading && (
+         {isBalanceFetching && isBalanceFetchSuccess && (
             <>
-               <Box w="100%"  boxShadow="lg" bg="gray.50">
+               <Box w="100%" boxShadow="lg" bg="gray.50">
                   <Progress size="xs" isIndeterminate />
                </Box>
             </>
@@ -56,10 +71,10 @@ export const Wallet = () => {
             <AlertMessage
                status="error"
                title="Some Error Occured"
-               description={balanceFetchErrorMessage}
+               description={errorBalanceFetchMessage}
             />
          )}
-         {isBalanceFetching && (
+         {isBalanceFetching && !isBalanceFetchSuccess && (
             <Stack>
                <Skeleton height="20px" />
                <Skeleton height="20px" />

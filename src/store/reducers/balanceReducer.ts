@@ -4,7 +4,7 @@ import {
    ADD_BALANCE_SUCCESS,
    FETCH_BALANCE_FAILURE,
    FETCH_BALANCE_REQUEST,
-   FETCH_BALANCE_SUCCESS
+   FETCH_BALANCE_SUCCESS,
 } from './../../types/Types'
 
 const initialState: BalanceState = {
@@ -12,11 +12,10 @@ const initialState: BalanceState = {
    isBalanceFetching: false,
    isBalanceFetchSuccess: false,
    isBalanceFetchError: false,
-   balanceFetchErrorMessage: '',
-   isBalanceAddLoading: false,
-   isBalanceAddSuccess: false,
-   isBalanceAddError: false,
-   balanceAddErrorMessage: ''
+   errorBalanceFetchMessage: '',
+   isAddBalanceSuccess: false,
+   isAddBalanceError: false,
+   errorAddBalanceMessage: '',
 }
 
 export const balanceReducer = (
@@ -43,28 +42,28 @@ export const balanceReducer = (
             ...state,
             isBalanceFetching: false,
             isBalanceFetchError: true,
-            balanceFetchErrorMessage: action?.payload?.balanceFetchErrorMessage,
+            errorBalanceFetchMessage: action?.payload?.errorBalanceFetchMessage,
          }
       case ADD_BALANCE_REQUEST:
          return {
             ...state,
-            isBalanceAddLoading: true,
-            isBalanceAddSuccess:false,
-            isBalanceAddError: false
+            isBalanceFetching: true,
+            isAddBalanceSuccess: false,
+            isAddBalanceError: false,
          }
       case ADD_BALANCE_SUCCESS:
          return {
             ...state,
-            isBalanceAddLoading: false,
-            isBalanceAddSuccess: true,
+            isBalanceFetching: false,
+            isAddBalanceSuccess: true,
             balance: action?.payload?.balance,
          }
       case ADD_BALANCE_FAILURE:
          return {
             ...state,
-            isBalanceAddLoading: false,
-            isBalanceAddError: true,
-            balanceAddErrorMessage: action?.payload?.balanceAddErrorMessage,
+            isBalanceFetching: false,
+            isAddBalanceError: true,
+            errorAddBalanceMessage: action?.payload?.errorAddBalanceMessage,
          }
 
       default:

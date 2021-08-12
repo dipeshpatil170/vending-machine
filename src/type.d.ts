@@ -7,10 +7,14 @@ interface IProduct {
 }
 type ProductState = {
    products: IProduct[]
+   product: IProduct
    isProductFetching: boolean
    isProductFetchSuccess: boolean
    isProductFetchError: boolean
-   productFetchErrorMessage: string
+   errorProductFetchMessage: string
+   isDecrementProductQuantitySuccess: boolean
+   isDecrementProductQuantityError: boolean
+   errorDecrementProductQuantityMessage: string
 }
 type ProductAction = {
    type: string
@@ -25,11 +29,10 @@ type BalanceState = {
    isBalanceFetching: boolean
    isBalanceFetchSuccess: boolean
    isBalanceFetchError: boolean
-   balanceFetchErrorMessage: string
-   isBalanceAddLoading: boolean
-   isBalanceAddSuccess: boolean
-   isBalanceAddError: boolean
-   balanceAddErrorMessage: string
+   errorBalanceFetchMessage: string
+   isAddBalanceSuccess: boolean
+   isAddBalanceError: boolean
+   errorAddBalanceMessage: string
 }
 
 type BalanceAction = {
@@ -42,15 +45,14 @@ interface IpurchasedProducts {
 }
 
 type PurchasedProductsState = {
-   purchasedProducts: IpurchasedProducts[]
+   purchasedProducts: IProductPurchaseProduct[]
    isPurchasedProductsFetching: boolean
    isPurchasedProductsFetchSuccess: boolean
    isPurchasedProductsFetchError: boolean
-   purchasedProductsFetchErrorMessage: string
-   isAddPurchasedProductLoading: boolean
+   errorPurchasedProductsFetchMessage: string
    isAddPurchasedProductSuccess: boolean
    isAddPurchasedProductError: boolean
-   purchasedProductsAddErrorMessage: string
+   errorAddPurchasedProductsMessage: string
 }
 
 type PurchasedProductsAction = {
@@ -58,6 +60,13 @@ type PurchasedProductsAction = {
    payload: PurchasedProductsState
 }
 interface IProductPurchase {
+   name: string
+   price: number
+   quantity: number
+   image: any
+}
+interface IProductPurchaseProduct {
+   id:number
    name: string
    price: number
    quantity: number

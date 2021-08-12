@@ -1,15 +1,28 @@
 import {
+   DECREMENT_PRODUCT_QUANTITY_FAILURE,
+   DECREMENT_PRODUCT_QUANTITY_REQUEST,
+   DECREMENT_PRODUCT_QUANTITY_SUCCESS,
    FETCH_PRODUCTS_FAILURE,
    FETCH_PRODUCTS_REQUEST,
-   FETCH_PRODUCTS_SUCCESS,
-} from '../../types/Types'
+   FETCH_PRODUCTS_SUCCESS
+} from '../../types/Types';
 
 const initialState: ProductState = {
    products: [],
+   product: {
+      name: '',
+      price: 0,
+      quantity: 0,
+      image: {},
+      id: 0
+   },
    isProductFetching: false,
    isProductFetchSuccess: false,
    isProductFetchError: false,
-   productFetchErrorMessage: '',
+   errorProductFetchMessage: '',
+   isDecrementProductQuantitySuccess: false,
+   isDecrementProductQuantityError: false,
+   errorDecrementProductQuantityMessage: '',
 }
 export const productReducer = (
    state = initialState,
@@ -35,7 +48,29 @@ export const productReducer = (
             ...state,
             isProductFetching: false,
             isProductFetchError: true,
-            productFetchErrorMessage: action?.payload?.productFetchErrorMessage,
+            errorProductFetchMessage: action?.payload?.errorProductFetchMessage,
+         }
+
+      case DECREMENT_PRODUCT_QUANTITY_REQUEST:
+         return {
+            ...state,
+            isProductFetching: true
+         }
+
+      case DECREMENT_PRODUCT_QUANTITY_SUCCESS:
+         return {
+            ...state,
+            isProductFetching: false,
+            isDecrementProductQuantitySuccess: true,
+            products: state.products.map((product) => product.id === action.payload.product.id ? action.payload.product : product),
+         }
+
+      case DECREMENT_PRODUCT_QUANTITY_FAILURE:
+         return {
+            ...state,
+            isProductFetching: false,
+            isDecrementProductQuantityError: true,
+            errorDecrementProductQuantityMessage: action?.payload?.errorDecrementProductQuantityMessage,
          }
 
       default:
