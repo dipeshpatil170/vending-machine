@@ -1,26 +1,9 @@
-import { Box, Container, Grid, GridItem, Skeleton, Stack, Text } from '@chakra-ui/react'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from './api/productsApi'
+import { Box, Container, Grid, GridItem, Stack, Text } from '@chakra-ui/react'
 import './App.css'
-import { AlertMessage } from './components/AlertMessage'
-import { BalancePannel } from './pages/balancePannel'
-import { ProductsList } from './pages/productsList'
-import { RootState } from './store/reducers'
+import { Product } from './pages/product'
 
-interface Props {
-
-}
+interface Props {}
 function App(props: Props) {
-   const dispatch = useDispatch()
-   const { products, isProductFetching, isProductFetchSuccess, isProductFetchError, productFetchErrorMessage } = useSelector((state: RootState) => {
-      return state.product
-   })
-
-   useEffect(() => {
-      dispatch(fetchProducts())
-   }, [dispatch])
-
    return (
       <Container maxW="container.xl" paddingTop={5}>
          <Grid
@@ -35,22 +18,7 @@ function App(props: Props) {
                      <Text fontSize="3xl">Products</Text>
                   </Stack>
                </Box>
-               {products && products.length > 0 && (
-                  <ProductsList products={products} />
-               )}
-               {products && isProductFetchSuccess && products.length === 0 && (
-                  <AlertMessage status="error" title="No Products Found" description="Seems there are no products available." />
-               )}
-               {isProductFetchError && (
-                  <AlertMessage status="error" title="Some Error Occured" description={productFetchErrorMessage} />
-               )}
-               {isProductFetching && (
-                  <Stack>
-                     <Skeleton height="20px" />
-                     <Skeleton height="20px" />
-                     <Skeleton height="20px" />
-                  </Stack>
-               )}
+               <Product />
             </GridItem>
             <GridItem colSpan={2} marginLeft={10}>
                <Box bg="gray" w="100%" p={3} color="white">
@@ -58,7 +26,6 @@ function App(props: Props) {
                      <Text fontSize="1xl">Wallet</Text>
                   </Stack>
                </Box>
-               <BalancePannel />
             </GridItem>
             <GridItem colSpan={2} marginLeft={10}>
                <Box bg="gray" w="100%" p={3} color="white">
@@ -67,7 +34,7 @@ function App(props: Props) {
                   </Stack>
                </Box>
             </GridItem>
-            <GridItem colSpan={2} marginLeft={10} >
+            <GridItem colSpan={2} marginLeft={10}>
                <Box bg="gray" w="100%" p={3} color="white">
                   <Stack spacing={3}>
                      <Text fontSize="1xl">Purchased Products</Text>
