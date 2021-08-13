@@ -1,4 +1,4 @@
-import { Box, Skeleton, Stack, Text } from '@chakra-ui/react'
+import { Box, Progress, Skeleton, Stack, Text } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../api/purchasedProductsApi'
 import { AlertMessage } from '../components/AlertMessage'
@@ -19,6 +19,9 @@ export const Product = () => {
    const { balance } = useSelector((state: RootState) => {
       return state.balance
    })
+   const { isPurchasedProductsFetching } = useSelector((state: RootState) => {
+      return state.purchasedProducts
+   })
 
    const handleBuyProduct = (product: IProduct) => {
       dispatch(addProduct(product, balance))
@@ -31,11 +34,19 @@ export const Product = () => {
                <Text fontSize="1xl">Products</Text>
             </Stack>
          </Box>
+
+         {isPurchasedProductsFetching && (
+            <Box w="100%" boxShadow="lg" bg="gray.200">
+               <Progress size="lg" isIndeterminate />
+            </Box>
+         )}
+
          {products && !isProductFetching && products.length > 0 && (
             <ProductsList
                products={products}
                balance={balance}
                handleBuyProduct={handleBuyProduct}
+               isPurchasedProductsFetching={isPurchasedProductsFetching}
             />
          )}
          {products && isProductFetchSuccess && products.length === 0 && (

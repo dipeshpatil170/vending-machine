@@ -1,10 +1,13 @@
 import {
-   ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS, FETCH_PURCHASEDPRODUCTS_FAILURE,
+   ADD_PRODUCT_FAILURE,
+   ADD_PRODUCT_REQUEST,
+   ADD_PRODUCT_SUCCESS,
+   FETCH_PURCHASEDPRODUCTS_FAILURE,
    FETCH_PURCHASEDPRODUCTS_REQUEST,
    FETCH_PURCHASEDPRODUCTS_SUCCESS,
    REMOVE_PRODUCT_FAILURE,
    REMOVE_PRODUCT_REQUEST,
-   REMOVE_PRODUCT_SUCCESS
+   REMOVE_PRODUCT_SUCCESS,
 } from './../../types/Types'
 
 const initialState: PurchasedProductsState = {
@@ -15,7 +18,7 @@ const initialState: PurchasedProductsState = {
       price: 0,
       quantity: 0,
       image: null,
-      productId: 0
+      productId: 0,
    },
    isPurchasedProductsFetching: false,
    isPurchasedProductsFetchSuccess: false,
@@ -96,7 +99,10 @@ export const purchasedProducts = (
             ...state,
             isPurchasedProductsFetching: false,
             isRemovePurchasedProductSuccess: true,
-            purchasedProducts: state.purchasedProducts.filter((purchasedProduct) => purchasedProduct.id !== action.payload.purchasedProduct.id),
+            purchasedProducts: state.purchasedProducts.filter(
+               (purchasedProduct) =>
+                  purchasedProduct.id !== action.payload.purchasedProduct.id
+            ),
          }
       }
       case REMOVE_PRODUCT_FAILURE:

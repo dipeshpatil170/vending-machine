@@ -6,7 +6,7 @@ import {
    Stat,
    StatLabel,
    StatNumber,
-   Text
+   Text,
 } from '@chakra-ui/react'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -27,11 +27,7 @@ export const Wallet = () => {
    } = useSelector((state: RootState) => {
       return state.balance
    })
-   const {
-      isRemovePurchasedProductSuccess,
-   } = useSelector((state: RootState) => {
-      return state.purchasedProducts
-   })
+
    return (
       <>
          <Box bg="gray" w="100%" p={3} color="white">
@@ -42,10 +38,27 @@ export const Wallet = () => {
 
          {balance && isBalanceFetchSuccess && (
             <>
-               <Stat p={4} boxShadow="lg" bg="gray.100" rounded={'md'}>
-                  <StatLabel>Available Balance</StatLabel>
-                  <StatNumber>₹ {balance?.amount}</StatNumber>
-               </Stat>
+               <Box w="100%" p={4} boxShadow="lg" bg="gray.200" rounded={'md'}>
+                  <Stack spacing={4} direction="row" align="center">
+                     <Stat
+                        h={'10%'}
+                        p={4}
+                        boxShadow="lg"
+                        bg="white"
+                        rounded={'md'}
+                     >
+                        <StatLabel>Available Balance</StatLabel>
+                        <StatNumber>₹ {balance?.amount}</StatNumber>
+                     </Stat>
+                  </Stack>
+               </Box>
+            </>
+         )}
+         {isBalanceFetching && isBalanceFetchSuccess && (
+            <>
+               <Box w="100%" boxShadow="lg" bg="gray.200">
+                  <Progress size="xs" isIndeterminate />
+               </Box>
             </>
          )}
          {isCreditBalanceSuccess && (
@@ -61,14 +74,6 @@ export const Wallet = () => {
                description={errorCreditBalanceMessage}
                status="error"
             />
-         )}
-
-         {isBalanceFetching && isBalanceFetchSuccess && (
-            <>
-               <Box w="100%" boxShadow="lg" bg="gray.100">
-                  <Progress size="xs" isIndeterminate />
-               </Box>
-            </>
          )}
 
          {isBalanceFetchError && (

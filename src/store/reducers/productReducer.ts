@@ -7,7 +7,7 @@ import {
    FETCH_PRODUCTS_SUCCESS,
    INCREMENT_PRODUCT_QUANTITY_FAILURE,
    INCREMENT_PRODUCT_QUANTITY_REQUEST,
-   INCREMENT_PRODUCT_QUANTITY_SUCCESS
+   INCREMENT_PRODUCT_QUANTITY_SUCCESS,
 } from '../../types/Types'
 
 const initialState: ProductState = {
@@ -28,7 +28,7 @@ const initialState: ProductState = {
    errorDecrementProductQuantityMessage: '',
    isIncrementProductQuantitySuccess: false,
    isIncrementProductQuantityError: false,
-   errorIncrementProductQuantityMessage: ''
+   errorIncrementProductQuantityMessage: '',
 }
 export const productReducer = (
    state = initialState,
@@ -83,7 +83,7 @@ export const productReducer = (
             errorDecrementProductQuantityMessage:
                action?.payload?.errorDecrementProductQuantityMessage,
          }
-      
+
       case INCREMENT_PRODUCT_QUANTITY_REQUEST:
          return {
             ...state,

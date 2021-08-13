@@ -3,10 +3,13 @@ import { SinglePurchasedProduct } from './singlePurchasedProduct'
 
 interface Props {
    purchasedProducts: IProductPurchaseProduct[]
-   handleRemovePurchasedProduct:Function
+   handleRemovePurchasedProduct: Function
 }
 
-export const PurchasedProductList = ({ purchasedProducts, handleRemovePurchasedProduct }: Props) => {
+export const PurchasedProductList = ({
+   purchasedProducts,
+   handleRemovePurchasedProduct,
+}: Props) => {
    return (
       <>
          <Box
@@ -29,7 +32,9 @@ export const PurchasedProductList = ({ purchasedProducts, handleRemovePurchasedP
                         <SinglePurchasedProduct
                            key={purchasedProduct?.id}
                            purchasedProduct={purchasedProduct}
-                           handleRemovePurchasedProduct={handleRemovePurchasedProduct}
+                           handleRemovePurchasedProduct={
+                              handleRemovePurchasedProduct
+                           }
                         />
                      )
                   })}

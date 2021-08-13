@@ -1,12 +1,14 @@
 import {
+   ADD_PRODUCT_FAILURE,
+   ADD_PRODUCT_REQUEST,
+   ADD_PRODUCT_SUCCESS,
    FETCH_PURCHASEDPRODUCTS_FAILURE,
    FETCH_PURCHASEDPRODUCTS_REQUEST,
    FETCH_PURCHASEDPRODUCTS_SUCCESS,
    REMOVE_PRODUCT_FAILURE,
    REMOVE_PRODUCT_REQUEST,
-   REMOVE_PRODUCT_SUCCESS
+   REMOVE_PRODUCT_SUCCESS,
 } from '../../types/Types'
-import { ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS } from './../../types/Types'
 
 export const fetchPurchasedProductsRequest = () => {
    return {
@@ -39,7 +41,9 @@ export const addProductRequest = () => {
    }
 }
 
-export const addProductSuccess = (purchasedProduct: IProductPurchaseProduct) => {
+export const addProductSuccess = (
+   purchasedProduct: IProductPurchaseProduct
+) => {
    return {
       type: ADD_PRODUCT_SUCCESS,
       payload: {
@@ -62,7 +66,9 @@ export const removeProductRequest = () => {
    }
 }
 
-export const removeProductSuccess = (purchasedProduct: IProductPurchaseProduct) => {
+export const removeProductSuccess = (
+   purchasedProduct: IProductPurchaseProduct
+) => {
    return {
       type: REMOVE_PRODUCT_SUCCESS,
       payload: {

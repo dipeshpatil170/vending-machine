@@ -8,7 +8,7 @@ import { PurchasedProductList } from '../containers/purchasedProductList'
 import { RootState } from '../store/reducers'
 
 export const PurchasedProducts = () => {
-   const dispatch = useDispatch();
+   const dispatch = useDispatch()
    const {
       purchasedProducts,
       isPurchasedProductsFetching,
@@ -24,8 +24,10 @@ export const PurchasedProducts = () => {
       return state.purchasedProducts
    })
 
-   const handleRemovePurchasedProduct = (purchasedProduct: IProductPurchaseProduct) => {
-      dispatch(removeProduct(purchasedProduct));
+   const handleRemovePurchasedProduct = (
+      purchasedProduct: IProductPurchaseProduct
+   ) => {
+      dispatch(removeProduct(purchasedProduct))
    }
 
    return (
@@ -37,7 +39,10 @@ export const PurchasedProducts = () => {
                      <Text fontSize="1xl">Purchased Products</Text>
                   </Stack>
                </Box>
-               <PurchasedProductList purchasedProducts={purchasedProducts} handleRemovePurchasedProduct={handleRemovePurchasedProduct} />
+               <PurchasedProductList
+                  purchasedProducts={purchasedProducts}
+                  handleRemovePurchasedProduct={handleRemovePurchasedProduct}
+               />
             </>
          )}
 
@@ -84,8 +89,6 @@ export const PurchasedProducts = () => {
                status="error"
             />
          )}
-
-         
       </>
    )
 }

@@ -46,7 +46,7 @@ function App() {
                <Product />
             </Stack>
             <Flex>
-               <Stack spacing={4}>
+               <Stack marginLeft={20} spacing={4}>
                   <Wallet />
                   <AddMoneyPannel />
                   <PurchasedProducts />

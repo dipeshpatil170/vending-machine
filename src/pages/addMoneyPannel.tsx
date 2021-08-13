@@ -10,10 +10,10 @@ export const AddMoneyPannel = () => {
       <>
          <Box bg="gray" w="100%" p={3} color="white">
             <Stack spacing={3}>
-               <Text fontSize="1xl">Add money option</Text>
+               <Text fontSize="1xl">Add Money </Text>
             </Stack>
          </Box>
-         <Box w="100%" p={4} boxShadow="lg" bg="gray.100" rounded={'md'}>
+         <Box w="100%" p={4} boxShadow="lg" bg="gray.200" rounded={'md'}>
             <Stack spacing={4} direction="row" align="center">
                {moneyOption.map((money, index) => {
                   return (
@@ -23,7 +23,7 @@ export const AddMoneyPannel = () => {
                         colorScheme="pink"
                         size="sm"
                      >
-                        {money}
+                        ₹ {money}
                      </Button>
                   )
                })}

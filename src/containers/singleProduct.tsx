@@ -5,15 +5,17 @@ interface Props {
    product: IProduct
    balance: Ibalance
    handleBuyProduct: Function
+   isPurchasedProductsFetching: boolean
 }
 
 export const SingleProduct = ({
    product,
    balance,
    handleBuyProduct,
+   isPurchasedProductsFetching,
 }: Props) => {
    return (
-      <Box padding="6" boxShadow="lg" bg="gray.100">
+      <Box padding="6" boxShadow="lg" bg="gray.200">
          <Image
             rounded={'md'}
             objectFit={'cover'}
@@ -45,7 +47,8 @@ export const SingleProduct = ({
                   colorScheme="teal"
                   size="md"
                   disabled={
-                     !(Number(balance?.amount) >= Number(product?.price))
+                     !(Number(balance?.amount) >= Number(product?.price)) ||
+                     isPurchasedProductsFetching
                   }
                >
                   Buy <AddIcon marginLeft={2} w={3} h={3} />

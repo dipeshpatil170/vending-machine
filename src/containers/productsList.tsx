@@ -5,12 +5,14 @@ interface Props {
    products: IProduct[]
    balance: Ibalance
    handleBuyProduct: Function
+   isPurchasedProductsFetching: boolean
 }
 
 export const ProductsList = ({
    products,
    balance,
    handleBuyProduct,
+   isPurchasedProductsFetching,
 }: Props) => {
    return (
       <>
@@ -32,6 +34,9 @@ export const ProductsList = ({
                            product={product}
                            balance={balance}
                            handleBuyProduct={handleBuyProduct}
+                           isPurchasedProductsFetching={
+                              isPurchasedProductsFetching
+                           }
                         />
                      )
                   })}

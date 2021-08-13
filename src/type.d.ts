@@ -46,7 +46,6 @@ type BalanceAction = {
    payload: BalanceState
 }
 
-
 type PurchasedProductsState = {
    purchasedProducts: IProductPurchaseProduct[]
    purchasedProduct: IProductPurchaseProduct
@@ -67,7 +66,7 @@ type PurchasedProductsAction = {
    payload: PurchasedProductsState
 }
 interface IProductPurchase {
-   productId:number
+   productId: number
    name: string
    price: number
    quantity: number
