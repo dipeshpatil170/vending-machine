@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, StackDivider, VStack } from "@chakra-ui/react";
 import { SinglePurchasedProduct } from "./singlePurchasedProduct";
 
 interface Props {
@@ -11,21 +11,26 @@ export const PurchasedProductList = ({ purchasedProducts }: Props) => {
     return (
         <>
             <Box
-                border="1px solid gray"
+                border="1px solid #eeeee4"
                 padding="1rem"
                 bg="white"
                 w="100%"
                 color="black"
+                rounded={"md"}
             >
-                <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+                <VStack
+                    divider={<StackDivider borderColor="gray.200" />}
+                    spacing={4}
+                    align="stretch"
+                >
                     {purchasedProducts &&
                         purchasedProducts.length > 0 &&
                         purchasedProducts.map((purchasedProduct) => {
                             return (
-                                <SinglePurchasedProduct key={purchasedProduct?.id} purchasedProduct={purchasedProduct}/>
+                                <SinglePurchasedProduct key={purchasedProduct?.id} purchasedProduct={purchasedProduct} />
                             )
                         })}
-                </Grid>
+                </VStack>
             </Box>
         </>
     )

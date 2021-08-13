@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem } from '@chakra-ui/react'
+import { Container, Flex, SimpleGrid, Stack } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchBalance } from './api/balanceApi'
@@ -12,35 +12,29 @@ import { Wallet } from './pages/wallet'
 
 function App() {
    const dispatch = useDispatch()
-
+ 
    useEffect(() => {
       dispatch(fetchProducts())
       dispatch(fetchBalance())
       dispatch(fetchPurchasedProducts())
    }, [dispatch])
    return (
-      <Container maxW="container.xl" paddingTop={5}>
-         <Grid
-            h="100%"
-            templateRows="repeat(3, 1fr)"
-            templateColumns="repeat(5, 1fr)"
-            gap={4}
-         >
-            <GridItem rowSpan={3} colSpan={3}>
+      <Container maxW={'5xl'} py={12}>
+         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
+            <Stack spacing={4}>
                <Product />
-            </GridItem>
-            <GridItem colSpan={2} marginLeft={10}>
-               <Wallet />
-            </GridItem>
-            <GridItem colSpan={2} marginLeft={10}>
-               <AddMoneyPannel />
-            </GridItem>
-            <GridItem colSpan={2} marginLeft={10}>
-               <PurchasedProducts />
-            </GridItem>
-         </Grid>
+            </Stack>
+            <Flex>
+               <Stack spacing={4}>
+                  <Wallet />
+                  <AddMoneyPannel />
+                  <PurchasedProducts />
+               </Stack>
+            </Flex>
+         </SimpleGrid>
       </Container>
    )
 }
+
 
 export default App

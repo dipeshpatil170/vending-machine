@@ -38,7 +38,7 @@ export const Wallet = () => {
 
          {balance && isBalanceFetchSuccess && (
             <>
-               <Stat p={4} boxShadow="lg" bg="gray.50">
+               <Stat p={4} boxShadow="lg" bg="gray.50" rounded={"md"}>
                   <StatLabel>Available Balance</StatLabel>
                   <StatNumber>₹ {balance?.amount}</StatNumber>
                </Stat>

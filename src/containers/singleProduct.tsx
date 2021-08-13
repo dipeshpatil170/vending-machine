@@ -14,7 +14,7 @@ export const SingleProduct = ({
 }: Props) => {
    return (
       <Box padding="6" boxShadow="lg" bg="gray.50">
-         <Image src={product?.image} alt={product?.name} w={'100%'} />
+         <Image rounded={"md"} src={product?.image} alt={product?.name} w={'100%'} />
          <Text fontSize="1xl" marginTop="5%" pt={2}>
             Name : {product?.name}
          </Text>

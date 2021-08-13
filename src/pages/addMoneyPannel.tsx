@@ -22,7 +22,7 @@ export const AddMoneyPannel = () => {
                <Text fontSize="1xl">Add money option</Text>
             </Stack>
          </Box>
-         <Box w="100%" p={4} boxShadow="lg" bg="gray.50">
+         <Box w="100%" p={4} boxShadow="lg" bg="gray.50" rounded={"md"}>
             <Stack spacing={4} direction="row" align="center">
                {moneyOption.map((money, index) => {
                   return (
