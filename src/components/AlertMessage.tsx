@@ -4,8 +4,7 @@ import {
    AlertIcon,
    AlertTitle,
 } from '@chakra-ui/react'
-import React from 'react'
-
+import PropTypes from 'prop-types' // ES6
 interface Props {
    status: any
    title: string
@@ -22,4 +21,9 @@ export const AlertMessage = ({ status, title, description }: Props) => {
          <AlertDescription fontSize={15}>{description}</AlertDescription>
       </Alert>
    )
+}
+AlertMessage.propTypes = {
+   status: PropTypes.any,
+   title: PropTypes.string,
+   description: PropTypes.string,
 }

@@ -1,5 +1,6 @@
 import { AlertStatus, useToast, Wrap } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import PropTypes from 'prop-types' // ES6
+import { useEffect } from 'react'
 
 interface Props {
    title: string
@@ -22,4 +23,9 @@ export const ToastNotification = ({ title, description, status }: Props) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
    return <Wrap></Wrap>
+}
+ToastNotification.propTypes = {
+   title: PropTypes.string,
+   description: PropTypes.string,
+   status: PropTypes.any,
 }

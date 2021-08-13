@@ -1,6 +1,6 @@
 import { Box, Grid } from '@chakra-ui/react'
+import PropTypes from 'prop-types' // ES6
 import { SingleProduct } from './singleProduct'
-
 interface Props {
    products: IProduct[]
    balance: Ibalance
@@ -44,4 +44,10 @@ export const ProductsList = ({
          </Box>
       </>
    )
+}
+ProductsList.propTypes = {
+   products: PropTypes.array,
+   balance: PropTypes.object,
+   handleBuyProduct: PropTypes.func,
+   isPurchasedProductsFetching: PropTypes.bool,
 }

@@ -1,5 +1,6 @@
 import { AddIcon } from '@chakra-ui/icons'
 import { Box, Button, Image, Text } from '@chakra-ui/react'
+import PropTypes from 'prop-types' // ES6
 
 interface Props {
    product: IProduct
@@ -57,4 +58,10 @@ export const SingleProduct = ({
          )}
       </Box>
    )
+}
+SingleProduct.propTypes = {
+   product: PropTypes.object,
+   balance: PropTypes.object,
+   handleBuyProduct: PropTypes.func,
+   isPurchasedProductsFetching: PropTypes.bool,
 }

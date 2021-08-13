@@ -8,7 +8,6 @@ import {
    StatNumber,
    Text,
 } from '@chakra-ui/react'
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { AlertMessage } from '../components/AlertMessage'
 import { ToastNotification } from '../components/ToastNotification'

@@ -1,4 +1,5 @@
 import { Box, StackDivider, VStack } from '@chakra-ui/react'
+import PropTypes from 'prop-types' // ES6
 import { SinglePurchasedProduct } from './singlePurchasedProduct'
 
 interface Props {
@@ -42,4 +43,8 @@ export const PurchasedProductList = ({
          </Box>
       </>
    )
+}
+PurchasedProductList.propTypes = {
+   purchasedProducts: PropTypes.array,
+   handleRemovePurchasedProduct: PropTypes.func,
 }
