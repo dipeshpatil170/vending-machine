@@ -1,45 +1,43 @@
 import { api } from '.'
 import {
-   decrememtProductQuantityFailure,
-   decrememtProductQuantityRequest,
-   decrememtProductQuantitySuccess,
-   fetchProductsFailure,
-   fetchProductsSuccess
+   decrementProductQuantityFailure, decrementProductQuantityRequest, decrementProductQuantitySuccess, fetchProductsFailure,
+   fetchProductsSuccess,
+   incrementProductQuantityFailure,
+   incrementProductQuantityRequest,
+   incrementProductQuantitySuccess
 } from '../store/actions/productAction'
 import { fetchProductsRequest } from './../store/actions/productAction'
 
 export const fetchProducts = () => {
-   return (dispatch: any) => {
+   return async (dispatch: any) => {
       dispatch(fetchProductsRequest())
-      setTimeout(async () => {
          await api
             .get('/products')
             .then((response) => dispatch(fetchProductsSuccess(response?.data)))
             .catch((error) => dispatch(fetchProductsFailure(error)))
-      }, 1000)
    }
 }
 export const decrementProductQuantity = (id: number, quantity: number) => {
    return async (dispatch: any) => {
-      dispatch(decrememtProductQuantityRequest())
+      dispatch(decrementProductQuantityRequest())
       await api
          .patch(`/products/${id}`, { quantity: quantity })
          .then((response) =>
-            dispatch(decrememtProductQuantitySuccess(response?.data))
+            dispatch(decrementProductQuantitySuccess(response?.data))
          )
-         .catch((error) => dispatch(decrememtProductQuantityFailure(error)))
+         .catch((error) => dispatch(decrementProductQuantityFailure(error)))
    }
 }
 export const incrementProductQuantity = (id: number, quantity: number) => {
    return async (dispatch: any) => {
-      dispatch(decrememtProductQuantityRequest())
+      dispatch(incrementProductQuantityRequest())
       const { data } = await api.get(`/products/${id}`);
       const incrementedQuantity = (data.quantity + quantity);
       await api
          .patch(`/products/${id}`, { quantity: incrementedQuantity })
          .then((response) =>
-            dispatch(decrememtProductQuantitySuccess(response?.data))
+            dispatch(incrementProductQuantitySuccess(response?.data))
          )
-         .catch((error) => dispatch(decrememtProductQuantityFailure(error)))
+         .catch((error) => dispatch(incrementProductQuantityFailure(error)))
    }
 }

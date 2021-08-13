@@ -1,8 +1,6 @@
 import { Box, Skeleton, Stack, Text } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { debitBalance } from '../api/balanceApi'
-import { decrementProductQuantity } from '../api/productsApi'
-import { buyProduct } from '../api/purchasedProductsApi'
+import { addProduct } from '../api/purchasedProductsApi'
 import { AlertMessage } from '../components/AlertMessage'
 import { ProductsList } from '../containers/productsList'
 import { RootState } from '../store/reducers'
@@ -23,16 +21,7 @@ export const Product = () => {
    })
 
    const handleBuyProduct = (product: IProduct) => {
-      let productTobePurchase: IProductPurchase = {
-         productId: product.id,
-         name: product.name,
-         price: product.price,
-         quantity: 1,
-         image: product.image,
-      }
-      dispatch(buyProduct(productTobePurchase))
-      dispatch(decrementProductQuantity(product.id, product.quantity - 1))
-      dispatch(debitBalance(balance.amount - product.price))
+      dispatch(addProduct(product, balance))
    }
 
    return (

@@ -1,13 +1,12 @@
 import {
    FETCH_PURCHASEDPRODUCTS_FAILURE,
    FETCH_PURCHASEDPRODUCTS_REQUEST,
-   FETCH_PURCHASEDPRODUCTS_SUCCESS
+   FETCH_PURCHASEDPRODUCTS_SUCCESS,
+   REMOVE_PRODUCT_FAILURE,
+   REMOVE_PRODUCT_REQUEST,
+   REMOVE_PRODUCT_SUCCESS
 } from '../../types/Types'
-import {
-   BUY_PRODUCT_FAILURE,
-   BUY_PRODUCT_REQUEST,
-   BUY_PRODUCT_SUCCESS
-} from './../../types/Types'
+import { ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS } from './../../types/Types'
 
 export const fetchPurchasedProductsRequest = () => {
    return {
@@ -34,25 +33,48 @@ export const fetchPurchasedProductsFailure = (e: Error) => {
    }
 }
 
-export const buyProductRequest = () => {
+export const addProductRequest = () => {
    return {
-      type: BUY_PRODUCT_REQUEST,
+      type: ADD_PRODUCT_REQUEST,
    }
 }
 
-export const buyProductSuccess = (purchasedProduct: IProductPurchaseProduct) => {
+export const addProductSuccess = (purchasedProduct: IProductPurchaseProduct) => {
    return {
-      type: BUY_PRODUCT_SUCCESS,
+      type: ADD_PRODUCT_SUCCESS,
       payload: {
          purchasedProducts: purchasedProduct,
       },
    }
 }
-export const buyProductFailure = (e: Error) => {
+export const addProductFailure = (e: Error) => {
    return {
-      type: BUY_PRODUCT_FAILURE,
+      type: ADD_PRODUCT_FAILURE,
       payload: {
          errorPurchasedProductsFetchMessage:
+            e?.message || 'Internal Server Error',
+      },
+   }
+}
+export const removeProductRequest = () => {
+   return {
+      type: REMOVE_PRODUCT_REQUEST,
+   }
+}
+
+export const removeProductSuccess = (purchasedProduct: IProductPurchaseProduct) => {
+   return {
+      type: REMOVE_PRODUCT_SUCCESS,
+      payload: {
+         purchasedProduct: purchasedProduct,
+      },
+   }
+}
+export const removeProductFailure = (e: Error) => {
+   return {
+      type: REMOVE_PRODUCT_FAILURE,
+      payload: {
+         errorRemovePurchasedProductsMessage:
             e?.message || 'Internal Server Error',
       },
    }

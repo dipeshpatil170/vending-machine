@@ -27,7 +27,11 @@ export const Wallet = () => {
    } = useSelector((state: RootState) => {
       return state.balance
    })
-
+   const {
+      isRemovePurchasedProductSuccess,
+   } = useSelector((state: RootState) => {
+      return state.purchasedProducts
+   })
    return (
       <>
          <Box bg="gray" w="100%" p={3} color="white">

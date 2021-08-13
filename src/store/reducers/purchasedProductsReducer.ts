@@ -1,14 +1,22 @@
 import {
-   BUY_PRODUCT_FAILURE,
-   BUY_PRODUCT_REQUEST,
-   BUY_PRODUCT_SUCCESS,
-   FETCH_PURCHASEDPRODUCTS_FAILURE,
+   ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS, FETCH_PURCHASEDPRODUCTS_FAILURE,
    FETCH_PURCHASEDPRODUCTS_REQUEST,
    FETCH_PURCHASEDPRODUCTS_SUCCESS,
+   REMOVE_PRODUCT_FAILURE,
+   REMOVE_PRODUCT_REQUEST,
+   REMOVE_PRODUCT_SUCCESS
 } from './../../types/Types'
 
 const initialState: PurchasedProductsState = {
    purchasedProducts: [],
+   purchasedProduct: {
+      id: 0,
+      name: '',
+      price: 0,
+      quantity: 0,
+      image: null,
+      productId: 0
+   },
    isPurchasedProductsFetching: false,
    isPurchasedProductsFetchSuccess: false,
    isPurchasedProductsFetchError: false,
@@ -16,6 +24,9 @@ const initialState: PurchasedProductsState = {
    isAddPurchasedProductSuccess: false,
    isAddPurchasedProductError: false,
    errorAddPurchasedProductsMessage: '',
+   isRemovePurchasedProductSuccess: false,
+   isRemovePurchasedProductError: false,
+   errorRemovePurchasedProductsMessage: '',
 }
 
 export const purchasedProducts = (
@@ -45,13 +56,15 @@ export const purchasedProducts = (
             errorPurchasedProductsFetchMessage:
                action?.payload?.errorPurchasedProductsFetchMessage,
          }
-      case BUY_PRODUCT_REQUEST: {
+      case ADD_PRODUCT_REQUEST: {
          return {
             ...state,
             isPurchasedProductsFetching: true,
+            isAddPurchasedProductSuccess: false,
+            isAddPurchasedProductError: false,
          }
       }
-      case BUY_PRODUCT_SUCCESS: {
+      case ADD_PRODUCT_SUCCESS: {
          return {
             ...state,
             isPurchasedProductsFetching: false,
@@ -61,13 +74,38 @@ export const purchasedProducts = (
             ),
          }
       }
-      case BUY_PRODUCT_FAILURE:
+      case ADD_PRODUCT_FAILURE:
          return {
             ...state,
             isPurchasedProductsFetching: false,
             isAddPurchasedProductError: true,
             errorAddPurchasedProductsMessage:
                action?.payload?.errorAddPurchasedProductsMessage,
+         }
+
+      case REMOVE_PRODUCT_REQUEST: {
+         return {
+            ...state,
+            isPurchasedProductsFetching: true,
+            isRemovePurchasedProductSuccess: false,
+            isRemovePurchasedProductError: false,
+         }
+      }
+      case REMOVE_PRODUCT_SUCCESS: {
+         return {
+            ...state,
+            isPurchasedProductsFetching: false,
+            isRemovePurchasedProductSuccess: true,
+            purchasedProducts: state.purchasedProducts.filter((purchasedProduct) => purchasedProduct.id !== action.payload.purchasedProduct.id),
+         }
+      }
+      case REMOVE_PRODUCT_FAILURE:
+         return {
+            ...state,
+            isPurchasedProductsFetching: false,
+            isRemovePurchasedProductError: true,
+            errorRemovePurchasedProductsMessage:
+               action?.payload?.errorRemovePurchasedProductsMessage,
          }
 
       default:

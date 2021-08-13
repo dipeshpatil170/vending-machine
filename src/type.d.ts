@@ -15,6 +15,9 @@ type ProductState = {
    isDecrementProductQuantitySuccess: boolean
    isDecrementProductQuantityError: boolean
    errorDecrementProductQuantityMessage: string
+   isIncrementProductQuantitySuccess: boolean
+   isIncrementProductQuantityError: boolean
+   errorIncrementProductQuantityMessage: string
 }
 type ProductAction = {
    type: string
@@ -46,6 +49,7 @@ type BalanceAction = {
 
 type PurchasedProductsState = {
    purchasedProducts: IProductPurchaseProduct[]
+   purchasedProduct: IProductPurchaseProduct
    isPurchasedProductsFetching: boolean
    isPurchasedProductsFetchSuccess: boolean
    isPurchasedProductsFetchError: boolean
@@ -53,6 +57,9 @@ type PurchasedProductsState = {
    isAddPurchasedProductSuccess: boolean
    isAddPurchasedProductError: boolean
    errorAddPurchasedProductsMessage: string
+   isRemovePurchasedProductSuccess: boolean
+   isRemovePurchasedProductError: boolean
+   errorRemovePurchasedProductsMessage: string
 }
 
 type PurchasedProductsAction = {

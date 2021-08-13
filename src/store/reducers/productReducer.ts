@@ -5,6 +5,9 @@ import {
    FETCH_PRODUCTS_FAILURE,
    FETCH_PRODUCTS_REQUEST,
    FETCH_PRODUCTS_SUCCESS,
+   INCREMENT_PRODUCT_QUANTITY_FAILURE,
+   INCREMENT_PRODUCT_QUANTITY_REQUEST,
+   INCREMENT_PRODUCT_QUANTITY_SUCCESS
 } from '../../types/Types'
 
 const initialState: ProductState = {
@@ -23,6 +26,9 @@ const initialState: ProductState = {
    isDecrementProductQuantitySuccess: false,
    isDecrementProductQuantityError: false,
    errorDecrementProductQuantityMessage: '',
+   isIncrementProductQuantitySuccess: false,
+   isIncrementProductQuantityError: false,
+   errorIncrementProductQuantityMessage: ''
 }
 export const productReducer = (
    state = initialState,
@@ -76,6 +82,33 @@ export const productReducer = (
             isDecrementProductQuantityError: true,
             errorDecrementProductQuantityMessage:
                action?.payload?.errorDecrementProductQuantityMessage,
+         }
+      
+      case INCREMENT_PRODUCT_QUANTITY_REQUEST:
+         return {
+            ...state,
+            isProductFetching: true,
+         }
+
+      case INCREMENT_PRODUCT_QUANTITY_SUCCESS:
+         return {
+            ...state,
+            isProductFetching: false,
+            isIncrementProductQuantitySuccess: true,
+            products: state.products.map((product) =>
+               product.id === action.payload.product.id
+                  ? action.payload.product
+                  : product
+            ),
+         }
+
+      case INCREMENT_PRODUCT_QUANTITY_FAILURE:
+         return {
+            ...state,
+            isProductFetching: false,
+            isIncrementProductQuantityError: true,
+            errorIncrementProductQuantityMessage:
+               action?.payload?.errorIncrementProductQuantityMessage,
          }
 
       default:

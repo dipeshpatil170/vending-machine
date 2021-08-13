@@ -1,10 +1,9 @@
 import { Box, Skeleton, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { creditBalance } from '../api/balanceApi'
-import { incrementProductQuantity } from '../api/productsApi'
 import { removeProduct } from '../api/purchasedProductsApi'
 import { AlertMessage } from '../components/AlertMessage'
+import { ToastNotification } from '../components/ToastNotification'
 import { PurchasedProductList } from '../containers/purchasedProductList'
 import { RootState } from '../store/reducers'
 
@@ -15,16 +14,18 @@ export const PurchasedProducts = () => {
       isPurchasedProductsFetching,
       isPurchasedProductsFetchError,
       errorPurchasedProductsFetchMessage,
+      isAddPurchasedProductSuccess,
+      isAddPurchasedProductError,
+      errorAddPurchasedProductsMessage,
+      isRemovePurchasedProductSuccess,
+      isRemovePurchasedProductError,
+      errorRemovePurchasedProductsMessage,
    } = useSelector((state: RootState) => {
       return state.purchasedProducts
    })
 
    const handleRemovePurchasedProduct = (purchasedProduct: IProductPurchaseProduct) => {
       dispatch(removeProduct(purchasedProduct));
-      dispatch(incrementProductQuantity(purchasedProduct.productId, purchasedProduct.quantity))
-      dispatch(creditBalance(purchasedProduct.price))
-      
-      
    }
 
    return (
@@ -54,6 +55,37 @@ export const PurchasedProducts = () => {
                <Skeleton height="20px" />
             </Stack>
          )}
+
+         {isAddPurchasedProductSuccess && (
+            <ToastNotification
+               title="Buy Product success!"
+               description="You can see product in product purchase list."
+               status="success"
+            />
+         )}
+         {isRemovePurchasedProductSuccess && (
+            <ToastNotification
+               title="Remove Product success!"
+               description="Product has been removed from purchase list, amount shall be credited soon to your wallet."
+               status="success"
+            />
+         )}
+         {isAddPurchasedProductError && (
+            <ToastNotification
+               title="Buy product failed !"
+               description={errorAddPurchasedProductsMessage}
+               status="error"
+            />
+         )}
+         {isRemovePurchasedProductError && (
+            <ToastNotification
+               title="Remove product failed !"
+               description={errorRemovePurchasedProductsMessage}
+               status="error"
+            />
+         )}
+
+         
       </>
    )
 }

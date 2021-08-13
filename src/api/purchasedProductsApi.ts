@@ -1,12 +1,17 @@
-import { api } from '.'
+import { api } from '.';
 import {
-   buyProductFailure,
-   buyProductRequest,
-   buyProductSuccess,
+   addProductFailure,
+   addProductRequest,
+   addProductSuccess,
    fetchPurchasedProductsFailure,
    fetchPurchasedProductsRequest,
-   fetchPurchasedProductsSuccess
-} from './../store/actions/purchasedProducts'
+   fetchPurchasedProductsSuccess,
+   removeProductFailure,
+   removeProductRequest,
+   removeProductSuccess
+} from './../store/actions/purchasedProducts';
+import { creditBalance, debitBalance } from './balanceApi';
+import { decrementProductQuantity, incrementProductQuantity } from './productsApi';
 
 export const fetchPurchasedProducts = () => {
    return (dispatch: any) => {
@@ -21,28 +26,34 @@ export const fetchPurchasedProducts = () => {
       }, 1000)
    }
 }
-export const buyProduct = (productPurchase: IProductPurchase) => {
-   return (dispatch: any) => {
-      dispatch(buyProductRequest())
-      setTimeout(async () => {
-         await api
-            .post('/purchasedproducts', productPurchase)
-            .then((response) => dispatch(buyProductSuccess(response?.data)))
-            .catch((error) => dispatch(buyProductFailure(error)))
-      }, 1000)
+export const addProduct = (product: IProduct,balance:Ibalance) => {
+   let productTobePurchase: IProductPurchase = {
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      image: product.image,
+   }
+   return async (dispatch: any) => {
+      dispatch(addProductRequest())
+      await api
+         .post('/purchasedproducts', productTobePurchase)
+         .then((response) => dispatch(addProductSuccess(response?.data)))
+         .catch((error) => dispatch(addProductFailure(error)))
+
+      await dispatch(decrementProductQuantity(product.id, product.quantity - 1))
+      await dispatch(debitBalance(balance.amount - product.price))
    }
 }
 
 export const removeProduct = (purchaseProduct: IProductPurchaseProduct) => {
-   console.log('purchaseProduct ', purchaseProduct);
-   
    return async (dispatch: any) => {
+      dispatch(removeProductRequest())
       await api.delete(`/purchasedproducts/${purchaseProduct.id}`)
-         .then((response) => {
-            console.log('response ', response);
-         })
-         .catch((error) => {
-            console.log('error ', error);
-         })
+         .then((response) => dispatch(removeProductSuccess(purchaseProduct)))
+         .catch((error) => dispatch(removeProductFailure(error)))
+
+      await dispatch(incrementProductQuantity(purchaseProduct.productId, purchaseProduct.quantity))
+      await dispatch(creditBalance(purchaseProduct.price))
    }
 }
