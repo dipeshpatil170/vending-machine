@@ -19,14 +19,27 @@ export const fetchProducts = () => {
       }, 1000)
    }
 }
-export const decrementProductQuantity = (product: IProduct) => {
-   return  (dispatch: any) => {
+export const decrementProductQuantity = (id: number, quantity: number) => {
+   return async (dispatch: any) => {
       dispatch(decrememtProductQuantityRequest())
-      setTimeout(async () => {
       await api
-         .put(`/products/${product?.id}`, product)
-         .then((response) => dispatch(decrememtProductQuantitySuccess(response?.data)))
-            .catch((error) => dispatch(decrememtProductQuantityFailure(error)))
-      }, 1000)
+         .patch(`/products/${id}`, { quantity: quantity })
+         .then((response) =>
+            dispatch(decrememtProductQuantitySuccess(response?.data))
+         )
+         .catch((error) => dispatch(decrememtProductQuantityFailure(error)))
+   }
+}
+export const incrementProductQuantity = (id: number, quantity: number) => {
+   return async (dispatch: any) => {
+      dispatch(decrememtProductQuantityRequest())
+      const { data } = await api.get(`/products/${id}`);
+      const incrementedQuantity = (data.quantity + quantity);
+      await api
+         .patch(`/products/${id}`, { quantity: incrementedQuantity })
+         .then((response) =>
+            dispatch(decrememtProductQuantitySuccess(response?.data))
+         )
+         .catch((error) => dispatch(decrememtProductQuantityFailure(error)))
    }
 }

@@ -9,7 +9,7 @@ import {
 } from './../store/actions/purchasedProducts'
 
 export const fetchPurchasedProducts = () => {
-   return async (dispatch: any) => {
+   return (dispatch: any) => {
       dispatch(fetchPurchasedProductsRequest())
       setTimeout(async () => {
          await api
@@ -18,19 +18,31 @@ export const fetchPurchasedProducts = () => {
                dispatch(fetchPurchasedProductsSuccess(response?.data))
             )
             .catch((error) => dispatch(fetchPurchasedProductsFailure(error)))
-      }, 10)
+      }, 1000)
    }
 }
 export const buyProduct = (productPurchase: IProductPurchase) => {
-   return async (dispatch: any) => {
+   return (dispatch: any) => {
       dispatch(buyProductRequest())
-      await api
-         .post('/purchasedproducts', productPurchase)
+      setTimeout(async () => {
+         await api
+            .post('/purchasedproducts', productPurchase)
+            .then((response) => dispatch(buyProductSuccess(response?.data)))
+            .catch((error) => dispatch(buyProductFailure(error)))
+      }, 1000)
+   }
+}
+
+export const removeProduct = (purchaseProduct: IProductPurchaseProduct) => {
+   console.log('purchaseProduct ', purchaseProduct);
+   
+   return async (dispatch: any) => {
+      await api.delete(`/purchasedproducts/${purchaseProduct.id}`)
          .then((response) => {
-            dispatch(buyProductSuccess(response?.data))
+            console.log('response ', response);
          })
          .catch((error) => {
-            dispatch(buyProductFailure(error))
+            console.log('error ', error);
          })
    }
 }

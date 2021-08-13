@@ -1,37 +1,40 @@
-import { Box, StackDivider, VStack } from "@chakra-ui/react";
-import { SinglePurchasedProduct } from "./singlePurchasedProduct";
+import { Box, StackDivider, VStack } from '@chakra-ui/react'
+import { SinglePurchasedProduct } from './singlePurchasedProduct'
 
 interface Props {
-    purchasedProducts: IProductPurchaseProduct[]
+   purchasedProducts: IProductPurchaseProduct[]
+   handleRemovePurchasedProduct:Function
 }
 
-export const PurchasedProductList = ({ purchasedProducts }: Props) => {
-    console.log('purchasedProducts ', purchasedProducts);
-    
-    return (
-        <>
-            <Box
-                border="1px solid #eeeee4"
-                padding="1rem"
-                bg="white"
-                w="100%"
-                color="black"
-                rounded={"md"}
+export const PurchasedProductList = ({ purchasedProducts, handleRemovePurchasedProduct }: Props) => {
+   return (
+      <>
+         <Box
+            border="1px solid #eeeee4"
+            padding="1rem"
+            bg="white"
+            w="100%"
+            color="black"
+            rounded={'md'}
+         >
+            <VStack
+               divider={<StackDivider borderColor="gray.200" />}
+               spacing={4}
+               align="stretch"
             >
-                <VStack
-                    divider={<StackDivider borderColor="gray.200" />}
-                    spacing={4}
-                    align="stretch"
-                >
-                    {purchasedProducts &&
-                        purchasedProducts.length > 0 &&
-                        purchasedProducts.map((purchasedProduct) => {
-                            return (
-                                <SinglePurchasedProduct key={purchasedProduct?.id} purchasedProduct={purchasedProduct} />
-                            )
-                        })}
-                </VStack>
-            </Box>
-        </>
-    )
+               {purchasedProducts &&
+                  purchasedProducts.length > 0 &&
+                  purchasedProducts.map((purchasedProduct) => {
+                     return (
+                        <SinglePurchasedProduct
+                           key={purchasedProduct?.id}
+                           purchasedProduct={purchasedProduct}
+                           handleRemovePurchasedProduct={handleRemovePurchasedProduct}
+                        />
+                     )
+                  })}
+            </VStack>
+         </Box>
+      </>
+   )
 }

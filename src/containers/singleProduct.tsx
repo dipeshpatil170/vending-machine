@@ -13,8 +13,14 @@ export const SingleProduct = ({
    handleBuyProduct,
 }: Props) => {
    return (
-      <Box padding="6" boxShadow="lg" bg="gray.50">
-         <Image rounded={"md"} src={product?.image} alt={product?.name} w={'100%'} />
+      <Box padding="6" boxShadow="lg" bg="gray.100">
+         <Image
+            rounded={'md'}
+            objectFit={'cover'}
+            src={product?.image}
+            alt={product?.name}
+            w={'100%'}
+         />
          <Text fontSize="1xl" marginTop="5%" pt={2}>
             Name : {product?.name}
          </Text>
@@ -38,7 +44,9 @@ export const SingleProduct = ({
                   mt={3}
                   colorScheme="teal"
                   size="md"
-                  disabled={!(Number(balance?.amount) >= Number(product?.price))}
+                  disabled={
+                     !(Number(balance?.amount) >= Number(product?.price))
+                  }
                >
                   Buy <AddIcon marginLeft={2} w={3} h={3} />
                </Button>

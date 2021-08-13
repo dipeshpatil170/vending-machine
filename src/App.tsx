@@ -1,4 +1,11 @@
-import { Container, Flex, SimpleGrid, Stack } from '@chakra-ui/react'
+import {
+   Center,
+   Container,
+   Flex,
+   SimpleGrid,
+   Stack,
+   Text,
+} from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchBalance } from './api/balanceApi'
@@ -12,14 +19,28 @@ import { Wallet } from './pages/wallet'
 
 function App() {
    const dispatch = useDispatch()
- 
+
    useEffect(() => {
       dispatch(fetchProducts())
       dispatch(fetchBalance())
       dispatch(fetchPurchasedProducts())
    }, [dispatch])
    return (
-      <Container maxW={'5xl'} py={12}>
+      <Container maxW={'8xl'} py={10}>
+         <Center>
+            <Text
+               textTransform={'uppercase'}
+               color={'blue.400'}
+               fontWeight={600}
+               fontSize={'lg'}
+               p={2}
+               alignSelf={'flex-center'}
+               rounded={'md'}
+            >
+               Vending Machine
+            </Text>
+         </Center>
+
          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
             <Stack spacing={4}>
                <Product />
@@ -35,6 +56,5 @@ function App() {
       </Container>
    )
 }
-
 
 export default App

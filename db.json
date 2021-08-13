@@ -3,28 +3,22 @@
     {
       "name": "Salad",
       "price": 10,
-      "quantity": 0,
+      "quantity": 9,
       "image": "http://lorempixel.com/160/160/food/5/",
       "id": 1
     }
   ],
   "balance": {
-    "amount": 50
+    "amount": 0
   },
   "purchasedproducts": [
     {
-      "name": "Salad",
-      "price": 10,
-      "quantity": 2,
-      "image": "http://lorempixel.com/160/160/food/5/",
-      "id": 1
-    },
-    {
+      "productId": 1,
       "name": "Salad",
       "price": 10,
       "quantity": 1,
       "image": "http://lorempixel.com/160/160/food/5/",
-      "id": 2
+      "id": 1
     }
   ]
 }

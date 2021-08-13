@@ -1,7 +1,10 @@
 import {
-   ADD_BALANCE_FAILURE,
-   ADD_BALANCE_REQUEST,
-   ADD_BALANCE_SUCCESS,
+   CREDIT_BALANCE_FAILURE,
+   CREDIT_BALANCE_REQUEST,
+   CREDIT_BALANCE_SUCCESS,
+   DEBIT_BALANCE_FAILURE,
+   DEBIT_BALANCE_REQUEST,
+   DEBIT_BALANCE_SUCCESS,
    FETCH_BALANCE_FAILURE,
    FETCH_BALANCE_REQUEST,
    FETCH_BALANCE_SUCCESS,
@@ -13,9 +16,12 @@ const initialState: BalanceState = {
    isBalanceFetchSuccess: false,
    isBalanceFetchError: false,
    errorBalanceFetchMessage: '',
-   isAddBalanceSuccess: false,
-   isAddBalanceError: false,
-   errorAddBalanceMessage: '',
+   isCreditBalanceSuccess: false,
+   isCreditBalanceError: false,
+   errorCreditBalanceMessage: '',
+   isDebitBalanceSuccess: false,
+   isDebitBalanceError: false,
+   errorDebitBalanceMessage: '',
 }
 
 export const balanceReducer = (
@@ -44,26 +50,54 @@ export const balanceReducer = (
             isBalanceFetchError: true,
             errorBalanceFetchMessage: action?.payload?.errorBalanceFetchMessage,
          }
-      case ADD_BALANCE_REQUEST:
+
+      case CREDIT_BALANCE_REQUEST:
          return {
             ...state,
             isBalanceFetching: true,
-            isAddBalanceSuccess: false,
-            isAddBalanceError: false,
+            isCreditBalanceSuccess: false,
+            isCreditBalanceError: false,
          }
-      case ADD_BALANCE_SUCCESS:
+
+      case CREDIT_BALANCE_SUCCESS:
          return {
             ...state,
             isBalanceFetching: false,
-            isAddBalanceSuccess: true,
+            isCreditBalanceSuccess: true,
             balance: action?.payload?.balance,
          }
-      case ADD_BALANCE_FAILURE:
+
+      case CREDIT_BALANCE_FAILURE:
          return {
             ...state,
             isBalanceFetching: false,
-            isAddBalanceError: true,
-            errorAddBalanceMessage: action?.payload?.errorAddBalanceMessage,
+            isCreditBalanceError: true,
+            errorCreditBalanceMessage:
+               action?.payload?.errorCreditBalanceMessage,
+         }
+
+      case DEBIT_BALANCE_REQUEST:
+         return {
+            ...state,
+            isBalanceFetching: true,
+            isDebitBalanceSuccess: false,
+            isDebitBalanceError: false,
+         }
+
+      case DEBIT_BALANCE_SUCCESS:
+         return {
+            ...state,
+            isBalanceFetching: false,
+            isDebitBalanceSuccess: true,
+            balance: action?.payload?.balance,
+         }
+
+      case DEBIT_BALANCE_FAILURE:
+         return {
+            ...state,
+            isBalanceFetching: false,
+            isDebitBalanceError: true,
+            errorDebitBalanceMessage: action?.payload?.errorDebitBalanceMessage,
          }
 
       default:

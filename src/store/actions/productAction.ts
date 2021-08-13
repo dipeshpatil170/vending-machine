@@ -2,9 +2,12 @@ import {
    DECREMENT_PRODUCT_QUANTITY_FAILURE,
    FETCH_PRODUCTS_FAILURE,
    FETCH_PRODUCTS_REQUEST,
-   FETCH_PRODUCTS_SUCCESS
-} from '../../types/Types';
-import { DECREMENT_PRODUCT_QUANTITY_REQUEST, DECREMENT_PRODUCT_QUANTITY_SUCCESS } from './../../types/Types';
+   FETCH_PRODUCTS_SUCCESS,
+} from '../../types/Types'
+import {
+   DECREMENT_PRODUCT_QUANTITY_REQUEST,
+   DECREMENT_PRODUCT_QUANTITY_SUCCESS,
+} from './../../types/Types'
 
 export const fetchProductsRequest = () => {
    return {
@@ -45,7 +48,8 @@ export const decrememtProductQuantityFailure = (e: Error) => {
    return {
       type: DECREMENT_PRODUCT_QUANTITY_FAILURE,
       payload: {
-         errorDecrementProductQuantityMessage: e?.message || 'Internal Server Error',
+         errorDecrementProductQuantityMessage:
+            e?.message || 'Internal Server Error',
       },
    }
 }

@@ -1,8 +1,11 @@
 import { api } from '.'
 import {
-   addBalanceFailure,
-   addBalanceRequest,
-   addBalanceSuccess,
+   creditBalanceFailure,
+   creditBalanceRequest,
+   creditBalanceSuccess,
+   debitBalanceFailure,
+   debitBalanceRequest,
+   debitBalanceSuccess,
    fetchBalanceFailure,
    fetchBalanceRequest,
    fetchBalanceSuccess
@@ -15,17 +18,30 @@ export const fetchBalance = () => {
             .get('/balance')
             .then((response) => dispatch(fetchBalanceSuccess(response?.data)))
             .catch((error) => dispatch(fetchBalanceFailure(error)))
-      }, 100)
-   }
-}
-export const addBalance = (moneyTobeAdded: number) => {
-   return (dispatch: any) => {
-      dispatch(addBalanceRequest())
-      setTimeout(async () => {
-         await api
-            .patch('/balance', { amount: moneyTobeAdded })
-            .then((response) => dispatch(addBalanceSuccess(response?.data)))
-            .catch((error) => dispatch(addBalanceFailure(error)))
       }, 1000)
    }
 }
+export const creditBalance = (balanceTobeCredit: number) => {
+   return async (dispatch: any) => {
+      const { data } = await api.get('/balance');
+      const newBalanceTobeCredit = (data.amount + balanceTobeCredit)
+      dispatch(creditBalanceRequest())
+      setTimeout(async () => {
+         await api
+            .patch('/balance', { amount: newBalanceTobeCredit })
+            .then((response) => dispatch(creditBalanceSuccess(response?.data)))
+            .catch((error) => dispatch(creditBalanceFailure(error)))
+      }, 1000)
+   }
+}
+export const debitBalance = (balanceTobeDebit: number) => {
+   return async (dispatch: any) => {
+      dispatch(debitBalanceRequest())
+         await api
+            .patch('/balance', { amount: balanceTobeDebit })
+            .then((response) => dispatch(debitBalanceSuccess(response?.data)))
+            .catch((error) => dispatch(debitBalanceFailure(error)))
+   }
+}
+
+

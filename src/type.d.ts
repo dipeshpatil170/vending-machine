@@ -30,9 +30,12 @@ type BalanceState = {
    isBalanceFetchSuccess: boolean
    isBalanceFetchError: boolean
    errorBalanceFetchMessage: string
-   isAddBalanceSuccess: boolean
-   isAddBalanceError: boolean
-   errorAddBalanceMessage: string
+   isCreditBalanceSuccess: boolean
+   isCreditBalanceError: boolean
+   errorCreditBalanceMessage: string
+   isDebitBalanceSuccess: boolean
+   isDebitBalanceError: boolean
+   errorDebitBalanceMessage: string
 }
 
 type BalanceAction = {
@@ -40,9 +43,6 @@ type BalanceAction = {
    payload: BalanceState
 }
 
-interface IpurchasedProducts {
-   purchasedProducts: IProduct
-}
 
 type PurchasedProductsState = {
    purchasedProducts: IProductPurchaseProduct[]
@@ -60,15 +60,17 @@ type PurchasedProductsAction = {
    payload: PurchasedProductsState
 }
 interface IProductPurchase {
+   productId:number
    name: string
    price: number
    quantity: number
    image: any
 }
 interface IProductPurchaseProduct {
-   id:number
+   id: number
    name: string
    price: number
    quantity: number
    image: any
+   productId: number
 }

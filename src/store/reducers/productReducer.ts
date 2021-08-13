@@ -4,8 +4,8 @@ import {
    DECREMENT_PRODUCT_QUANTITY_SUCCESS,
    FETCH_PRODUCTS_FAILURE,
    FETCH_PRODUCTS_REQUEST,
-   FETCH_PRODUCTS_SUCCESS
-} from '../../types/Types';
+   FETCH_PRODUCTS_SUCCESS,
+} from '../../types/Types'
 
 const initialState: ProductState = {
    products: [],
@@ -14,7 +14,7 @@ const initialState: ProductState = {
       price: 0,
       quantity: 0,
       image: {},
-      id: 0
+      id: 0,
    },
    isProductFetching: false,
    isProductFetchSuccess: false,
@@ -54,7 +54,7 @@ export const productReducer = (
       case DECREMENT_PRODUCT_QUANTITY_REQUEST:
          return {
             ...state,
-            isProductFetching: true
+            isProductFetching: true,
          }
 
       case DECREMENT_PRODUCT_QUANTITY_SUCCESS:
@@ -62,7 +62,11 @@ export const productReducer = (
             ...state,
             isProductFetching: false,
             isDecrementProductQuantitySuccess: true,
-            products: state.products.map((product) => product.id === action.payload.product.id ? action.payload.product : product),
+            products: state.products.map((product) =>
+               product.id === action.payload.product.id
+                  ? action.payload.product
+                  : product
+            ),
          }
 
       case DECREMENT_PRODUCT_QUANTITY_FAILURE:
@@ -70,7 +74,8 @@ export const productReducer = (
             ...state,
             isProductFetching: false,
             isDecrementProductQuantityError: true,
-            errorDecrementProductQuantityMessage: action?.payload?.errorDecrementProductQuantityMessage,
+            errorDecrementProductQuantityMessage:
+               action?.payload?.errorDecrementProductQuantityMessage,
          }
 
       default:

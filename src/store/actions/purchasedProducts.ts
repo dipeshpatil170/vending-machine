@@ -1,12 +1,12 @@
 import {
    FETCH_PURCHASEDPRODUCTS_FAILURE,
    FETCH_PURCHASEDPRODUCTS_REQUEST,
-   FETCH_PURCHASEDPRODUCTS_SUCCESS,
+   FETCH_PURCHASEDPRODUCTS_SUCCESS
 } from '../../types/Types'
 import {
    BUY_PRODUCT_FAILURE,
    BUY_PRODUCT_REQUEST,
-   BUY_PRODUCT_SUCCESS,
+   BUY_PRODUCT_SUCCESS
 } from './../../types/Types'
 
 export const fetchPurchasedProductsRequest = () => {
@@ -16,7 +16,7 @@ export const fetchPurchasedProductsRequest = () => {
 }
 
 export const fetchPurchasedProductsSuccess = (
-   purchasedProducts: IpurchasedProducts[]
+   purchasedProducts: IProductPurchaseProduct[]
 ) => {
    return {
       type: FETCH_PURCHASEDPRODUCTS_SUCCESS,
@@ -40,7 +40,7 @@ export const buyProductRequest = () => {
    }
 }
 
-export const buyProductSuccess = (purchasedProduct: IpurchasedProducts) => {
+export const buyProductSuccess = (purchasedProduct: IProductPurchaseProduct) => {
    return {
       type: BUY_PRODUCT_SUCCESS,
       payload: {

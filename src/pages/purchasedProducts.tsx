@@ -1,11 +1,15 @@
 import { Box, Skeleton, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { creditBalance } from '../api/balanceApi'
+import { incrementProductQuantity } from '../api/productsApi'
+import { removeProduct } from '../api/purchasedProductsApi'
 import { AlertMessage } from '../components/AlertMessage'
 import { PurchasedProductList } from '../containers/purchasedProductList'
 import { RootState } from '../store/reducers'
 
 export const PurchasedProducts = () => {
+   const dispatch = useDispatch();
    const {
       purchasedProducts,
       isPurchasedProductsFetching,
@@ -14,6 +18,14 @@ export const PurchasedProducts = () => {
    } = useSelector((state: RootState) => {
       return state.purchasedProducts
    })
+
+   const handleRemovePurchasedProduct = (purchasedProduct: IProductPurchaseProduct) => {
+      dispatch(removeProduct(purchasedProduct));
+      dispatch(incrementProductQuantity(purchasedProduct.productId, purchasedProduct.quantity))
+      dispatch(creditBalance(purchasedProduct.price))
+      
+      
+   }
 
    return (
       <>
@@ -24,7 +36,7 @@ export const PurchasedProducts = () => {
                      <Text fontSize="1xl">Purchased Products</Text>
                   </Stack>
                </Box>
-               <PurchasedProductList purchasedProducts={purchasedProducts}/>
+               <PurchasedProductList purchasedProducts={purchasedProducts} handleRemovePurchasedProduct={handleRemovePurchasedProduct} />
             </>
          )}
 

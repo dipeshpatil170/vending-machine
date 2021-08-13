@@ -21,9 +21,9 @@ export const Wallet = () => {
       isBalanceFetchSuccess,
       isBalanceFetchError,
       errorBalanceFetchMessage,
-      isAddBalanceSuccess,
-      isAddBalanceError,
-      errorAddBalanceMessage,
+      isCreditBalanceSuccess,
+      isCreditBalanceError,
+      errorCreditBalanceMessage,
    } = useSelector((state: RootState) => {
       return state.balance
    })
@@ -38,30 +38,30 @@ export const Wallet = () => {
 
          {balance && isBalanceFetchSuccess && (
             <>
-               <Stat p={4} boxShadow="lg" bg="gray.50" rounded={"md"}>
+               <Stat p={4} boxShadow="lg" bg="gray.100" rounded={'md'}>
                   <StatLabel>Available Balance</StatLabel>
                   <StatNumber>₹ {balance?.amount}</StatNumber>
                </Stat>
             </>
          )}
-         {isAddBalanceSuccess && (
+         {isCreditBalanceSuccess && (
             <ToastNotification
                title="Balance Credited !"
                description="Amount has been credited into your wallet."
                status="success"
             />
          )}
-         {isAddBalanceError && (
+         {isCreditBalanceError && (
             <ToastNotification
                title="Error Occured !"
-               description={errorAddBalanceMessage}
+               description={errorCreditBalanceMessage}
                status="error"
             />
          )}
 
          {isBalanceFetching && isBalanceFetchSuccess && (
             <>
-               <Box w="100%" boxShadow="lg" bg="gray.50">
+               <Box w="100%" boxShadow="lg" bg="gray.100">
                   <Progress size="xs" isIndeterminate />
                </Box>
             </>

@@ -1,12 +1,15 @@
 import {
+   DEBIT_BALANCE_FAILURE,
+   DEBIT_BALANCE_REQUEST,
+   DEBIT_BALANCE_SUCCESS,
    FETCH_BALANCE_FAILURE,
    FETCH_BALANCE_REQUEST,
    FETCH_BALANCE_SUCCESS,
 } from '../../types/Types'
 import {
-   ADD_BALANCE_FAILURE,
-   ADD_BALANCE_REQUEST,
-   ADD_BALANCE_SUCCESS,
+   CREDIT_BALANCE_FAILURE,
+   CREDIT_BALANCE_REQUEST,
+   CREDIT_BALANCE_SUCCESS,
 } from './../../types/Types'
 
 export const fetchBalanceRequest = () => {
@@ -30,24 +33,45 @@ export const fetchBalanceFailure = (e: Error) => {
       },
    }
 }
-export const addBalanceRequest = () => {
+export const creditBalanceRequest = () => {
    return {
-      type: ADD_BALANCE_REQUEST,
+      type: CREDIT_BALANCE_REQUEST,
    }
 }
 
-export const addBalanceSuccess = (balance: Ibalance) => {
+export const creditBalanceSuccess = (balance: Ibalance) => {
    return {
-      type: ADD_BALANCE_SUCCESS,
+      type: CREDIT_BALANCE_SUCCESS,
       payload: { balance: balance },
    }
 }
 
-export const addBalanceFailure = (e: Error) => {
+export const creditBalanceFailure = (e: Error) => {
    return {
-      type: ADD_BALANCE_FAILURE,
+      type: CREDIT_BALANCE_FAILURE,
       payload: {
-         errorAddBalanceMessage: e?.message || 'Internal Server Error',
+         errorCreditBalanceMessage: e?.message || 'Internal Server Error',
+      },
+   }
+}
+export const debitBalanceRequest = () => {
+   return {
+      type: DEBIT_BALANCE_REQUEST,
+   }
+}
+
+export const debitBalanceSuccess = (balance: Ibalance) => {
+   return {
+      type: DEBIT_BALANCE_SUCCESS,
+      payload: { balance: balance },
+   }
+}
+
+export const debitBalanceFailure = (e: Error) => {
+   return {
+      type: DEBIT_BALANCE_FAILURE,
+      payload: {
+         errorDebitBalanceMessage: e?.message || 'Internal Server Error',
       },
    }
 }

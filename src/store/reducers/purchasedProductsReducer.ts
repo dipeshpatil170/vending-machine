@@ -4,7 +4,7 @@ import {
    BUY_PRODUCT_SUCCESS,
    FETCH_PURCHASEDPRODUCTS_FAILURE,
    FETCH_PURCHASEDPRODUCTS_REQUEST,
-   FETCH_PURCHASEDPRODUCTS_SUCCESS
+   FETCH_PURCHASEDPRODUCTS_SUCCESS,
 } from './../../types/Types'
 
 const initialState: PurchasedProductsState = {
@@ -48,7 +48,7 @@ export const purchasedProducts = (
       case BUY_PRODUCT_REQUEST: {
          return {
             ...state,
-            isPurchasedProductsFetching:true
+            isPurchasedProductsFetching: true,
          }
       }
       case BUY_PRODUCT_SUCCESS: {

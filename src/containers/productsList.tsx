@@ -20,7 +20,7 @@ export const ProductsList = ({
             bg="white"
             w="100%"
             color="black"
-            rounded={"md"}
+            rounded={'md'}
          >
             <Grid templateColumns="repeat(3, 1fr)" gap={6}>
                {products &&
